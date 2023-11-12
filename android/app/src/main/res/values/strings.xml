@@ -2,6 +2,6 @@
   <string name="app_name">phishit</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
-  <string name="facebook_app_id">353574913848444</string>
-  <string name="facebook_client_token">df175dcaaaf7cc48e8e89db6c8a2bb4b</string>
+  <string name="facebook_app_id">7094664697244330</string>
+  <string name="facebook_client_token">0b9c82d0e6725582934c789f0dc82627</string>
 </resources>

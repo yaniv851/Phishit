@@ -43,8 +43,14 @@ export default function SignUp(props) {
   }
 
   const onFacebookLogin = async ()=>{
-    const response = await getFbToken();
-    console.log('response', response)
+    try {
+      const response = await getFbToken();
+      console.log('response', response)
+    }catch (err) {
+      console.error(err)
+      LoginManager.logOut();
+    }
+
   }
 
   return (
