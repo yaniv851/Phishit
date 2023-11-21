@@ -14,10 +14,44 @@ import Images from '../../Styles/Images';
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Colors from '../../Styles/Colors';
+import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
 
 
 export default function SignUp(props) {
   const [checked, setChecked] = useState(false)
+  const getFbToken = () => {
+    return new Promise((resolve, reject) => {
+      LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+          function (result) {
+            if (result.isCancelled) {
+              reject('');
+            } else {
+              AccessToken.getCurrentAccessToken()
+                  .then((data) => {
+                    resolve(data);
+                  })
+                  .catch((e) => {
+                    reject(e);
+                  });
+            }
+          },
+          function (error) {
+            reject(`Facebook signin failed with error : ${error}`);
+          },
+      );
+    });
+  }
+
+  const onFacebookLogin = async ()=>{
+    try {
+      const response = await getFbToken();
+      console.log('response', response)
+    }catch (err) {
+      console.error(err)
+      LoginManager.logOut();
+    }
+
+  }
 
   return (
     <LinearGradient colors={['#02272B', '#022326']}
@@ -77,7 +111,7 @@ export default function SignUp(props) {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => { props.navigation.navigate("") }}
+            <TouchableOpacity onPress={onFacebookLogin}
               style={Styles.nextButton}>
               <View style={Styles.innerButton}>
                 <Ionic
